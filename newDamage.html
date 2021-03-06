@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+	<script src="lib/jquery.js"></script>
+	<link href="css/bootstrap.css" rel="stylesheet" />
+	<script src="lib/bootstrap.js"></script>
+	<script src="lib/alasql.js"></script>
+	<script src="lib/purl.js"></script>
+	<script src="js/db.js"></script>
+	
+	
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	
+	<link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta name="viewport" content="width=device-width">
+	<title>New Damage Entry</title>
+	<!--<script src="js/cookieLogin.js"></script>-->
+
+
+</head>
+<style>
+	.highlightt {
+		background: yellow;
+	  }
+	.modal-backdrop {
+		z-index: -1;
+	  }
+</style>
+<body>
+    <nav class="navbar navbar-default no-margin">
+    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header fixed-brandd">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"  id="menu-toggle">
+                      <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                    </button>
+                    <a class="navbar-brand" href="href="main.html""><i class="fa fa-rocket fa-4"></i><span id="pageName">Company Inventory Management</span></a>        
+                </div><!-- navbar-header-->
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active" ><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
+                            </ul>
+                <!--</div>--><!-- bs-example-navbar-collapse-1 -->
+				
+				<!--<div class="collapse navbar-collapse" id="navbar-collapse">-->
+				
+				
+				
+				
+				<ul class="nav navbar-nav col-lg-offset-2" id="slogan" style="padding-top: 6px;">
+					<h4>Record Defected Item Found In Warehouse</h6>	
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right ">
+					<li><a href="#" onclick="logoutCookie();" class="btn btn-lg "><span
+					class="icon-off"></span>Logout</a></li>	
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>
+							Settings <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a onclick="window.location.reload(true);"><span
+									class="glyphicon glyphicon-refresh"></span> Reload</a></li>
+							<li><a onclick="DB.init();"><span
+									class="glyphicon glyphicon-repeat"></span> Init DB</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a onclick="DB.remove();"><span
+									class="glyphicon glyphicon-trash"></span> Delete DB</a></li>
+						</ul>
+					</li>
+				</ul>				
+			</div>
+				               
+    </nav>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+
+                <li >
+                    <a href="home.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x "></i></span>Home</a>
+                       
+                </li>
+				<li >
+                    <a href="main.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-exclamation-triangle fa-stack-1x "></i></span>Reorder<span class="badge" id="reorderBadge"></span></a>
+                       
+                </li>
+			   
+			   <li >
+                    <a href="outgoing.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-arrow-circle-left fa-stack-1x "></i></span><span style="color:#ff0080;" >Outgoing Stock</span><span class="badge" id="outgoingBadge"></span></a>
+                       
+                </li>	
+			   
+			   <li >
+                    <a href="incoming.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-arrow-circle-right fa-stack-1x "></i></span><span style="color:#00ff40;" >Incoming Stock</span><span class="badge" id="incomingBadge"></span></a>
+                       
+                </li>
+			   
+                
+                <li >
+                    <a href="filterPage.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-filter fa-stack-1x "></i></span>Filter product</a>
+                </li>
+				<li >
+                    <a  href="#" id="addTag"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus-circle fa-stack-1x "></i></span>Add New </a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li ><a href="newItem.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-laptop fa-stack-1x "></i></span>Hardware</a></li>
+                        <li ><a href="newMaker.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-apple fa-stack-1x "></i></span>Hardware Brand</a></li>
+						<li><a href="newClassification.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-file-text-o fa-stack-1x "></i></span>Hardware Type</a></li>
+						<!--<li ><a href="newWarehouse.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Warehouse</a></li>-->
+                    </ul>
+                </li>
+				
+				<li  >
+                    <a  href="#" id="damageTag"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Damaged Items <span class="badge" id="totalDamageBadge"></span> </a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+						<li class="active"><a href="newDamage.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus-square fa-stack-1x "></i></span>New Damage Entry</a></li>
+                        <li ><a href="inRetailer.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-arrow-circle-right fa-stack-1x "></i></span>From Retailer<span class="badge" id="inRetailerBadge"></span></a> </li>
+                        <li><a href="outMaintenance.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-arrow-circle-left fa-stack-1x "></i></span>To Maintenance<span class="badge" id="outMainBadge"></span></a></li>
+						<li ><a href="inMain.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-arrow-circle-right fa-stack-1x "></i></span>From Maintenance<span class="badge" id="inMainBadge"></span></a></li>
+						<li ><a href="outRetailer.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-arrow-circle-left fa-stack-1x "></i></span>To Retailer<span class="badge" id="outRetailerBadge"></span></a></li>
+                    </ul>
+                </li>
+                
+				<li >
+                    <a  href="#" id="transferTag"><span class="fa-stack fa-lg pull-left"><i class="fa fa-exchange fa-stack-1x "></i></span>Transfer Request<span class="badge" id="totalTransferBadge"></span></a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+						<li ><a href="inTransfer.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-angle-double-right fa-stack-1x "></i></span>Incoming Transfer<span class="badge" id="inTransferBadge"></a></li>
+                        <li ><a href="outTransfer.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-angle-double-left fa-stack-1x "></i></span>Outgoing Transfer<span class="badge" id="outTransferBadge"></span></a> </li>
+                    </ul>
+                </li>
+					
+				<li>
+                    <a href="statistics.html"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-line-chart fa-stack-1x "></i></span>Statistics</a>
+                </li>
+                               
+            </ul>
+        </div><!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid xyz">
+             
+				<div class="row">
+					<div class="col-lg-2">
+						<div class="input-group">
+					
+							<span class="input-group-addon" id="basic-addon1">Item Code</span>
+							<input type="text" class="form-control" placeholder="Item Code" id="itemCode" name="itemCode" aria-describedby="basic-addon1" title="Generic code of that product">
+						</div>
+					</div>
+					
+					<div class="col-lg-2">
+						<div class="input-group">
+					
+							<span class="input-group-addon" id="basic-addon1">Product Unique Id</span>
+							<input type="text" class="form-control" placeholder="Product Id" id="productId" aria-describedby="basic-addon1" title="Damaged product's unique ID">
+						</div>
+					</div>
+				
+				</div>
+				
+				 <br>
+				 
+				 <div class="row ">
+				<div class="row col-lg-4">
+					<div class="formm-group ">
+						<label for="comment">Description:</label>
+						<input class="form-control" rows="2" id="description"></input>
+					</div>
+				</div>
+				</div>
+				<br>
+				
+				<div>
+					<button  class="btn btn-primary" onclick="addFun()">
+						<span class="glyphicon "></span> Enter To Outgoing Maintenance 
+					</button>
+					
+				</div>
+		</div>  
+			
+			
+			
+        
+
+		</div><!-- /#page-content-wrapper -->
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!--<script src="js/sidebar_menu.js"></script>-->
+	
+	
+	<script src="js/newDamage.js"></script>
+</body>
+
+</html>
+
+
+
+

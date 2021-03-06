@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    
+	<script src="lib/jquery.js"></script>
+	<link href="css/bootstrap.css" rel="stylesheet" />
+	<script src="lib/bootstrap.js"></script>
+	<script src="lib/alasql.js"></script>
+	<script src="lib/purl.js"></script>
+	<script src="js/db.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.12/af-2.1.2/b-1.2.2/b-colvis-1.2.2/b-flash-1.2.2/b-html5-1.2.2/b-print-1.2.2/cr-1.3.2/fc-3.2.2/fh-3.1.2/kt-2.1.3/r-2.1.0/rr-1.1.2/sc-1.4.2/se-1.2.0/datatables.min.css"/>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.12/af-2.1.2/b-1.2.2/b-colvis-1.2.2/b-flash-1.2.2/b-html5-1.2.2/b-print-1.2.2/cr-1.3.2/fc-3.2.2/fh-3.1.2/kt-2.1.3/r-2.1.0/rr-1.1.2/sc-1.4.2/se-1.2.0/datatables.min.js"></script>
+	
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Inventory System</title>
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="js/cookieLogin.js"></script>
+	
+
+
+
+</head>
+<style>
+	table, th, td {
+   text-align: center;
+}
+</style>
+<body>
+    <nav class="navbar navbar-default no-margin">
+    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header fixed-brandd">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"  id="menu-toggle">
+                      <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                    </button>
+                    <a class="navbar-brand" href="main.html"><i class="fa fa-rocket fa-4"></i><span id="pageName">Company Inventory Management</span></a>        
+                </div><!-- navbar-header-->
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active" ><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
+                            </ul>
+                <!--</div>--><!-- bs-example-navbar-collapse-1 -->
+				
+				<!--<div class="collapse navbar-collapse" id="navbar-collapse">-->
+				
+				
+				
+				
+				<ul class="nav navbar-nav " id="quickUpdate">
+					<li><a href="stock-form.html" class="btn btn-lg "><span
+					class="icon-off"></span>Update Inventory</a></li>	
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right ">
+					<li><a href="#" onclick="logoutCookie();" class="btn btn-lg "><span
+					class="icon-off"></span>Logout</a></li>	
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>
+							Settings <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a onclick="window.location.reload(true);"><span
+									class="glyphicon glyphicon-refresh"></span> Reload</a></li>
+							<li><a onclick="DB.init();"><span
+									class="glyphicon glyphicon-repeat"></span> Init DB</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a onclick="DB.remove();"><span
+									class="glyphicon glyphicon-trash"></span> Delete DB</a></li>
+						</ul>
+					</li>
+				</ul>				
+			</div>
+				               
+    </nav>
+    <div id="wrapper" >
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+
+               <li class="active">
+                    <a href="main.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-file fa-stack-1x "></i></span>View Products</a>
+                       
+                </li>
+                
+                <li >
+                    <a href="filterPage.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-filter fa-stack-1x "></i></span>Filter product</a>
+                </li>
+				<li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus-square fa-stack-1x "></i></span>Add New </a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li ><a href="newItem.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Hardware</a></li>
+                        <li ><a href="newMaker.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Hardware Maker</a></li>
+						<li><a href="newClassification.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Hardware Type</a></li>
+						<li ><a href="newWarehouse.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Warehouse</a></li>
+                    </ul>
+                </li>
+				
+                <li>
+                    <a href="statistics.html"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-line-chart fa-stack-1x "></i></span>Statistics</a>
+                </li>
+				
+				<li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Damaged Items</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li ><a href="inRetailer.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Incoming  Retailer<span class="badge" id="inRetailerBadge">5</span></a> </li>
+                        <li><a href="outMaintenance.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Outgoing Maintenance</a></li>
+						<li><a href="inMain.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Incoming Maintenance</a></li>
+						<li ><a href="outRetailer.html"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>Outgoing Retailer</a></li>
+                    </ul>
+                </li>
+                
+                
+            </ul>
+        </div><!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper" style="padding:0px !important">
+            <div class="container-fluid xyz">
+                <div class="row">
+                    <div class="colllll-lg-12">
+                       <div class="containerrrr"  style="margin-top:0px !important">
+							<div  action="#" class="form-inline text-center"><!--actionnnnn="main.html"-->
+								<div class="colll-offset-sm-1">
+										<div class="form-group">
+											<label>Warehouse</label> <select name="q1" class="form-control">
+												<option value="0">All</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>Classification</label> <select name="q2" class="form-control">
+												<option value="0">All</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>Maker</label> <select name="maker" class="form-control">
+												<option value="0">All</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label>Code</label> <input name="q3" type="text"
+												class="form-control" placeholder="Prefix Search">
+										</div>
+										<button  class="btn btn-primary" id="filter" onclick="filter()">
+											<span class="glyphicon glyphicon-search"></span> Search
+										</button>
+								</div>
+							</div>
+		
+	
+	  <div class="col-lg-12" style=" height:550px; border:1px solid black; margin: 0px">
+	  <!--ADEDED LATER-->
+		<table class="table table-hover table-condensed dt-responsive nowrap display searchHighlight" id="stock-table" cellspacing="0" wiiidth="50%">
+			<thead>
+				<tr>
+					<th>StockId</th>
+					<th>Warehouse</th>
+					<th style="text-align:left">Classification</th>
+					<th>Code</th>
+					<th>Maker</th>
+					<th>Item Count</th>
+					<th>Reorder Point</th>
+					<th>Before Reorder</th><!--emain to reorder-->
+					<th>Reorder Quantity</th>
+										
+					<th>Last Purchase</th>
+					<th>Last Supply</th>
+					
+					<th>Unit Price</th>
+					<th>Total Price</th>
+					<th>Detail</th>
+					
+				</tr>
+			</thead>
+			<tbody id="tbody-stocks"></tbody>
+		</table>
+	  </div>
+		<script src="js/main.js"></script>
+	</div> <!--<conatiner-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/sidebar_menu.js"></script>
+</body>
+
+</html>

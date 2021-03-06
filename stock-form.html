@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="lib/jquery.js"></script>
+<link href="css/bootstrap.css" rel="stylesheet" />
+<script src="lib/bootstrap.js"></script>
+<script src="lib/alasql.js"></script>
+<script src="lib/purl.js"></script>
+<script src="js/db.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="viewport" content="width=device-width">
+<title>COMPANY</title>
+</head>
+<body>
+	<nav class="navbar navbar-default no-margin">
+    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header fixed-brandd">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"  id="menu-toggle">
+                      <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                    </button>
+                    <a class="navbar-brand" href="href="main.html""><i class="fa fa-rocket fa-4"></i><span id="pageName">Company Inventory Management</span></a>        
+                </div><!-- navbar-header-->
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active" ><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
+                            </ul>
+                <!--</div>--><!-- bs-example-navbar-collapse-1 -->
+				
+				<!--<div class="collapse navbar-collapse" id="navbar-collapse">-->
+				
+				
+				
+				
+				<ul class="nav navbar-nav " id="quickUpdate">
+					<li><a href="stock-form.html" class="btn btn-lg "><span
+					class="icon-off"></span>Update Inventory</a></li>	
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right ">
+					<li><a href="#" onclick="logoutCookie();" class="btn btn-lg "><span
+					class="icon-off"></span>Logout</a></li>	
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>
+							Settings <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a onclick="window.location.reload(true);"><span
+									class="glyphicon glyphicon-refresh"></span> Reload</a></li>
+							<li><a onclick="DB.init();"><span
+									class="glyphicon glyphicon-repeat"></span> Init DB</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a onclick="DB.remove();"><span
+									class="glyphicon glyphicon-trash"></span> Delete DB</a></li>
+						</ul>
+					</li>
+				</ul>				
+			</div>
+				               
+    </nav>
+
+	<div class="container">
+
+		<!-- Bread crumbs -->
+		<ol class="breadcrumb">
+			<li><a href="main.html">Inventory List</a></li>
+			<li class="active"><span>New</span></li>
+		</ol>
+
+		<!-- Abstract -->
+		<div class="form">
+			<input type="hidden" name="id">
+			<div class="form-group">
+				<label>Warehouse</label> <select class="form-control" name="whouse"></select>
+			</div>
+			<div class="form-group">
+				<label>Item</label> <select class="form-control" name="item"></select>
+			</div>
+			<div class="form-group">
+				<label>Date</label> <input type="date" class="form-control"
+					name="date">
+			</div>
+			<div class="form-group">
+				<label>Quantity</label> <input type="number" class="form-control"
+					name="qty" value=""
+					placeholder="positive value for storage, negative for retrieval">
+			</div>
+			<div class="form-group">
+				<label>Comment</label>
+				<textarea class="form-control" name="memo"
+					placeholder="must put comment"></textarea>
+			</div>
+			<button type="submit" class="btn btn-success" id="update">
+				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save
+			</button>
+		</div>
+	</div>
+	<script src="js/stock-form.js"></script>
+</body>
+</html>
